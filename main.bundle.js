@@ -42,15 +42,11 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	(function webpackMissingModule() { throw new Error("Cannot find module \"babel-polyfill\""); }());
+	(function webpackMissingModule() { throw new Error("Cannot find module \"./lib/index.js\""); }());
 
-	var sayHello = function sayHello() {
-	  return console.log('Hello');
-	};
-
-	sayHello();
 
 /***/ }
 /******/ ]);
