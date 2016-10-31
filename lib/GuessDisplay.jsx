@@ -1,14 +1,22 @@
 const React = require('react');
-const guess = require('./input');
 
-class GuessField extends React.Component {
 
+
+class GuessDisplay extends React.Component {
+
+
+// let result;
+//   if (this.props.lastGuess > this.props.computerNumber) {
+//     result = 'too high';
+//   }
 
 
 render() {
   return (
-
-
+    <div>
+      <h2>Your last guess was {this.props.lastGuess}</h2>
+      <h3>That number is {} - Guess again. </h3>
+    </div>
   );
 }
 
@@ -16,4 +24,4 @@ render() {
 
 }
 
-module.exports = GuessField;
+module.exports = GuessDisplay;
