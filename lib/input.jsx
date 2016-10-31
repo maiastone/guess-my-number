@@ -34,35 +34,44 @@ class GuessInputFields extends React.Component {
     })
   }
 
-
   compareGuess() {
       if (this.state.guess > this.state.computerNumber.randomNumber) {
-      return 'too high'
+      return 'too high.'
     } else if (this.state.guess < this.state.computerNumber.randomNumber) {
-      return 'too low'
-    } else if (this.state.guess === this.state.computerNumber.randomNumber) {
-      return 'perfect';
+      return 'too low.'
     }
   }
 
-  render() {
+  compareShorten() {
+        if (this.state.guess > this.state.computerNumber.randomNumber) {
+        return 'lower'
+      } else if (this.state.guess < this.state.computerNumber.randomNumber) {
+        return 'higher'
+      }
+    }
 
-    let displayMessaage = this.compareGuess();
+
+  render() {
+    let tooHighLow = this.compareGuess();
+    let nextGuessHint = this.compareShorten();
     return (
       <div>
         <h2>your last guess was {this.state.lastGuess}</h2>
-        <h3>your guess was {displayMessaage}!</h3>
-        <input type='number' value={this.state.guess}
-            placeholder='guess a number'
-            onChange={(e)=>this.setState({guess: parseInt(e.target.value, 10)})} />
-        <button onClick={()=>this.handleClick()}>Guess</button>
-        <button onClick={()=>this.clearInput()}>Clear</button>
-        <button onClick={()=>this.resetGame()}>Reset</button>
-
+        <h3 id='message'>Sorry, that guess is {tooHighLow} Try a {nextGuessHint} number.</h3>
+        <form>
+          <input type='number'
+                placeholder='guess a number'
+                value={this.state.guess}
+                onChange={(e)=>this.setState({guess: parseInt(e.target.value, 10)})} />
+          <button onClick={()=>this.handleClick()}>Guess</button>
+          <button onClick={()=>this.clearInput()}>Clear</button>
+          <button onClick={()=>this.resetGame()}>Reset</button>
+        </form>
       </div>
     );
   }
 }
+
 
 
 module.exports = GuessInputFields;
