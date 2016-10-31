@@ -11,61 +11,59 @@ class GuessInputFields extends React.Component {
     }
   }
 
-  generateRandomNumber(min, max){
-    return Math.floor(Math.random() * (max-min + 1)) + min;
+  componentDidMount() {
+    let randomNumber = Math.floor(Math.random() * (100-0 + 1)) + 0;
+    // this.generateRandomNumber(0, 100);
+    this.setState({computerNumber: randomNumber });
   }
 
-  handleClick() {
-    let randomNumber = this.generateRandomNumber(0, 100);
-    this.setState({lastGuess: this.state.guess});
-    this.setState({guess:''});
-    this.setState({computerNumber: {randomNumber} });
-  }
-
-  clearInput() {
+  clearInput(e) {
+    e.preventDefault();
     this.setState({guess:''});
   }
 
-  resetGame() {
+  resetGame(e) {
+    e.preventDefault();
+    let randomNumber = Math.floor(Math.random() * (100-0 + 1)) + 0;
     this.setState({
-      computerNumber: '',
+      computerNumber: randomNumber,
       lastGuess: '',
       guess: ''
     })
   }
 
   compareGuess() {
-      if (this.state.guess > this.state.computerNumber.randomNumber) {
-      return 'too high.'
-    } else if (this.state.guess < this.state.computerNumber.randomNumber) {
-      return 'too low.'
+    let guess = this.state.guess;
+    let random = this.state.computerNumber;
+    if (guess > random) {
+    document.getElementById('message').innerHTML =
+    'Sorry, that guess is too high. Try a lower number.';
+  } else if (guess < random) {
+    document.getElementById('message').innerHTML =
+    'Sorry, that guess is too low. Try a higher number.'
     }
   }
 
-  compareShorten() {
-        if (this.state.guess > this.state.computerNumber.randomNumber) {
-        return 'lower'
-      } else if (this.state.guess < this.state.computerNumber.randomNumber) {
-        return 'higher'
-      }
-    }
-
+  handleClick(e) {
+    e.preventDefault();
+    this.compareGuess();
+    this.setState({lastGuess: this.state.guess});
+    this.setState({guess:''});
+  }
 
   render() {
-    let tooHighLow = this.compareGuess();
-    let nextGuessHint = this.compareShorten();
     return (
       <div>
         <h2>your last guess was {this.state.lastGuess}</h2>
-        <h3 id='message'>Sorry, that guess is {tooHighLow} Try a {nextGuessHint} number.</h3>
+        <p id='message'></p>
         <form>
           <input type='number'
                 placeholder='guess a number'
                 value={this.state.guess}
                 onChange={(e)=>this.setState({guess: parseInt(e.target.value, 10)})} />
-          <button onClick={()=>this.handleClick()}>Guess</button>
-          <button onClick={()=>this.clearInput()}>Clear</button>
-          <button onClick={()=>this.resetGame()}>Reset</button>
+          <button onClick={(e)=>this.handleClick(e)}>Guess</button>
+          <button onClick={(e)=>this.clearInput(e)}>Clear</button>
+          <button onClick={(e)=>this.resetGame(e)}>Reset</button>
         </form>
       </div>
     );
