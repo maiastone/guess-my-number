@@ -34,14 +34,24 @@ class GuessInputFields extends React.Component {
     })
   }
 
-  // compareGuess() {
-  //   this.state.guess > this.state.computerNumber.randomNumber ? 'too high' : 'too low' }
+
+  compareGuess() {
+      if (this.state.guess > this.state.computerNumber.randomNumber) {
+      return 'too high'
+    } else if (this.state.guess < this.state.computerNumber.randomNumber) {
+      return 'too low'
+    } else if (this.state.guess === this.state.computerNumber.randomNumber) {
+      return 'perfect';
+    }
+  }
 
   render() {
+
+    let displayMessaage = this.compareGuess();
     return (
       <div>
         <h2>your last guess was {this.state.lastGuess}</h2>
-        <h3>your guess was {}!</h3>
+        <h3>your guess was {displayMessaage}!</h3>
         <input type='number' value={this.state.guess}
             placeholder='guess a number'
             onChange={(e)=>this.setState({guess: parseInt(e.target.value, 10)})} />
