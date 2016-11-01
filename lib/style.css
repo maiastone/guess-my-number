@@ -1,6 +1,5 @@
-/**/TODO
-/*#message {
-  if (this.setState.guess="") {
-    visibility: none;
-  }
-}*/
+
+input {
+  width: 200px;
+  height: 50px;
+}
