@@ -35,23 +35,21 @@ class GuessInputFields extends React.Component {
   compareGuess() {
     let guess = this.state.guess;
     let random = this.state.computerNumber;
-    if (guess > random) {
-    document.getElementById('message').innerHTML =
-    'Sorry, that guess is too high. Try a lower number.';
-  } else if (guess < random) {
-    document.getElementById('message').innerHTML =
-    'Sorry, that guess is too low. Try a higher number.';
-  } else if (guess === random) {
-    document.getElementById('message').innerHTML =
-    'Yay!  You got it';
+    if (guess >= 100 || guess <= 1) {
+    this.setState({message: 'Please enter a number between 1 and 100'});
+    } else if (guess > random) {
+      this.setState({message: 'Sorry, that guess is too high. Try a lower number.'});
+    } else if (guess < random) {
+      this.setState({message: 'Sorry, that guess is too low. Try a higher number.'});
+    } else if (guess === random) {
+      this.setState({message: 'Yay! You got it'});
+    }
   }
-}
 
   handleClick(e) {
     e.preventDefault();
     this.compareGuess();
-    this.setState({lastGuess: this.state.guess});
-    this.setState({guess:''});
+    this.setState({lastGuess: this.state.guess, guess:'' });
   }
 
   render() {
@@ -69,10 +67,10 @@ class GuessInputFields extends React.Component {
             <button disabled={!this.state.guess}
             onClick={(e)=>this.handleClick(e)}>Guess</button>
 
-          <button disabled={!this.state.guess}
+            <button disabled={!this.state.guess}
              onClick={(e)=>this.clearInput(e)}>Clear</button>
 
-           <button disabled={!this.state.guess}
+            <button disabled={!this.state.guess}
             onClick={(e)=>this.resetGame(e)}>Reset</button>
         </form>
       </div>
