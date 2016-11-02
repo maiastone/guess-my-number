@@ -85,8 +85,7 @@ class GuessInputFields extends React.Component {
           <input type='number'
                 placeholder='enter your max'
                 value={this.state.max}
-                onChange={(e)=>this.setState({max: parseInt(e.target.value)})}
-                 />
+                onChange={(e)=>this.setState({max: parseInt(e.target.value)})} />
 
           <button disabled={!(this.state.max && this.state.min)}
            onClick={(e)=>this.generateRandomNumber(e)}>Sumbit Max/Min</button>
