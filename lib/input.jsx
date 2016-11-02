@@ -14,9 +14,15 @@ class GuessInputFields extends React.Component {
     };
   }
 
+  componentDidMount(){
+    let min = 1;
+    let max = 100;
+    this.setState({computerNumber: Math.floor(Math.random() * (max-min + 1)) + min});
+  }
+
   generateRandomNumber(e) {
     e.preventDefault();
-    let {min, max} = this.state || {min: 1, max: 100};
+    let {min, max} = this.state;
     let randomNumber = Math.floor(Math.random() * (max-min + 1)) + min;
     this.setState({computerNumber: randomNumber});
   }
